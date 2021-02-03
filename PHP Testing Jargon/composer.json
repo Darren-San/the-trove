@@ -1,0 +1,22 @@
+{
+  "name": "darren-san/example",
+  "authors": [
+    {
+      "name": "Darren-San",
+      "email": "valridion@gmail.com"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "test/"
+    }
+  }
+}
