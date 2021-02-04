@@ -6,8 +6,8 @@ This repository is for filing programming exercises for future consulting.
 Includes
 ---
 
-#### PHP Testing Jargon
+#### PHP Testing Jargon ***[Link](https://laracasts.com/series/php-testing-jargon)***
 A php course from Laracast made as an introduction to TDD.
-[Link](https://laracasts.com/series/php-testing-jargon)
+
 
 #### And more to come
