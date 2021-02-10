@@ -4,20 +4,26 @@ namespace App;
 
 class Quiz
 {
-  protected array $questions;
+  protected Questions $questions;
+
+  public function __construct()
+  {
+    $this->questions = new Questions();
+  }
 
   public function addQuestion(Question $question)
   {
-    $this->questions[] = $question;
+    $this->questions->add($question);
+  }
+
+  public function begin()
+  {
+    return $this->nextQuestion();
   }
 
   public function nextQuestion()
   {
-    $question = current($this->questions);
-
-    next($this->questions);
-
-    return $question;
+    return $this->questions->next();
   }
 
   public function questions()
@@ -25,24 +31,19 @@ class Quiz
     return $this->questions;
   }
 
-  public function grade()
+  public function isComplete()
   {
-    foreach ($this->questions as $question) $allAnswered = $question->getAnswer() ? 1 : 0;
-
-    if ($allAnswered == 0) {
-      throw new \Exception('A test must not be graded until all questions have been answered');
-    }
-    
-    $correct = count($this->correctlyAnsweredQuestions());
-    return ($correct / count($this->questions)) * 100;
+    return count($this->questions->answered()) === $this->questions->count();
   }
 
-  protected function correctlyAnsweredQuestions()
+  public function grade()
   {
-    return array_filter(
-      $this->questions,
-      fn($question) => $question->solved()
-    );
+    if (!$this->isComplete()) {
+      throw new \Exception("This quiz has not yet been completed.");
+    }
+
+    $correct = count($this->questions->solved());
+    return ($correct / count($this->questions)) * 100;
   }
 
   public function getQuestions()

@@ -22,17 +22,17 @@ class Question
   {
     $this->answer = $answer;
 
-    return $this->correct = $answer === $this->solution;
+    return $this->solved();
+  }
+
+  public function answered()
+  {
+      return isset($this->answer);
   }
 
   public function solved()
   {
-    return $this->correct;
-  }
-
-  public function getQuestionBody()
-  {
-    return $this->body;
+    return $this->answer === $this->solution;
   }
   public function getAnswer()
   {
