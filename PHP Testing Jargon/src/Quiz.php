@@ -13,7 +13,11 @@ class Quiz
 
   public function nextQuestion()
   {
-    return $this->questions[0];
+    $question = current($this->questions);
+
+    next($this->questions);
+
+    return $question;
   }
 
   public function questions()
@@ -23,9 +27,13 @@ class Quiz
 
   public function grade()
   {
+    foreach ($this->questions as $question) $allAnswered = $question->getAnswer() ? 1 : 0;
 
+    if ($allAnswered == 0) {
+      throw new \Exception('A test must not be graded until all questions have been answered');
+    }
+    
     $correct = count($this->correctlyAnsweredQuestions());
-
     return ($correct / count($this->questions)) * 100;
   }
 
@@ -35,5 +43,10 @@ class Quiz
       $this->questions,
       fn($question) => $question->solved()
     );
+  }
+
+  public function getQuestions()
+  {
+    return $this->questions;
   }
 }

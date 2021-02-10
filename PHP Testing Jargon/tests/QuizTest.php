@@ -10,7 +10,7 @@ class QuizTest extends TestCase
 {
 
   /** @test */
-  public function test_it_consists_of_questions()
+  public function it_consists_of_questions()
   {
     $quiz = new Quiz();
 
@@ -48,15 +48,28 @@ class QuizTest extends TestCase
   }
 
   // HOMEWORK
-  // /** @test */
-  // public function it_correctly_tracks_the_next_question_in_the_queue()
-  // {
-  //
-  // }
-  //
-  // /** @test */
-  // public function it_cannot_be_graded_until_all_questions_have_been_answered()
-  // {
-  //
-  // }
+  /** @test */
+  public function it_correctly_tracks_the_next_question_in_the_queue()
+  {
+    $quiz = new Quiz();
+
+    $quiz->addQuestion(new Question("What is 2 + 2?", 4));
+    $quiz->addQuestion(new Question("What is the capital of Spain?", 'Madrid'));
+
+    $this->assertEquals("What is 2 + 2?",  $quiz->nextQuestion()->getQuestionBody());
+  }
+
+  /** @test */
+  public function it_cannot_be_graded_until_all_questions_have_been_answered()
+  {
+    $quiz = new Quiz();
+
+    $quiz->addQuestion(new Question("What is the capital of Spain?", 'Madrid'));
+    $question = $quiz->nextQuestion();
+
+    $this->expectException(\Exception::class);
+    $this->expectExceptionMessage("A test must not be graded until all questions have been answered");
+
+    $quiz->grade();
+  }
 }

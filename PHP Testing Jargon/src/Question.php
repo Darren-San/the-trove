@@ -29,4 +29,13 @@ class Question
   {
     return $this->correct;
   }
+
+  public function getQuestionBody()
+  {
+    return $this->body;
+  }
+  public function getAnswer()
+  {
+    return $this->answer;
+  }
 }
