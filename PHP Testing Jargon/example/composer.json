@@ -3,7 +3,7 @@
   "authors": [
     {
       "name": "Darren-San",
-      "email": "valridion@gmail.com"
+      "email": "jpineda.nullglass@gmail.com"
     }
   ],
   "require": {
@@ -16,7 +16,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "test/"
+      "Tests\\": "tests/"
     }
   }
 }
